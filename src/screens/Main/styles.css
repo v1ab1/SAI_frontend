@@ -1,0 +1,15 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+.child {
+    display: flex;
+    border-right: 2px solid gray;
+    height: calc(100vh - 41px);
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: scroll;
+}

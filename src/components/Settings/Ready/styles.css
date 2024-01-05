@@ -1,0 +1,18 @@
+.save_button {
+    margin: 8px;
+    background-color: rgb(5, 122, 239);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    font-family: Helvetica, Arial, sans-serif;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    border: none;
+    font-size: 14px;
+}
+
+.save_button:hover {
+    background-color: rgb(0, 110, 219);
+}

@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    width: calc(100% - 24px);
+    min-width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-family: Helvetica, Arial, sans-serif
+}
+
+.header_links {
+    text-decoration: none;
+    color: white
+}
