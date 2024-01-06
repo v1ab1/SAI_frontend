@@ -3,26 +3,38 @@ import { useSelector } from "react-redux";
 import { Func } from "../Functions/Func"
 import { Ready } from "./Ready"
 import { settings } from "./settings"
-import { selectFile, selectSelectedMode } from "../../store/signedSlice";
+import { selectFile, selectJWT, selectSelectedMode } from "../../store/signedSlice";
 import { useEffect, useState } from "react";
 import { API_URL } from "../../API_URL";
 import "./styles.css"
 
-export const Settings = () => {
+export const Settings = ({isReload, setReload}: {isReload: boolean, setReload: (arg: boolean) => void}) => {
     const selectedFunc = useSelector(selectSelectedMode);
     const filename = useSelector(selectFile);
     const [selectedSetting, setSelectedSetting] = useState('');
     const [value, setValue] = useState('');
+    const token = useSelector(selectJWT);
 
     useEffect(() => {
         setSelectedSetting('')
         setValue('')
     }, [selectedFunc])
 
-    const sendFile = () => {
-        const url = API_URL + selectedFunc
+    const sendFile = async () => {
+        const url = API_URL + 'features/' + selectedFunc
         if (filename) {
-            axios.post(url, {value: value === '' ? selectedSetting : value, filename})
+            const result = await axios.post(url, {
+                value: value === '' ? selectedSetting : value,
+                filename,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            if (result.data) {
+                alert(result.data)
+            }
+            setReload(!isReload)
         }
     }
 

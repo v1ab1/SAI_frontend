@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import {File} from './File'
-import { FileUploadButton } from './SendFile';
 import { API_URL } from '../../API_URL';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { selectJWT } from '../../store/signedSlice';
-import { DeleteFile } from './DeleteFile';
+import { DeleteFile } from '../Files/DeleteFile';
+import { File } from "../Files/File";
 
 interface FileData {
     originalName: string;
@@ -13,7 +12,7 @@ interface FileData {
     filename: string;
 }  
 
-export const Files = () => {
+export const ModifiedFiles = ({isReload}: {isReload: boolean}) => {
     const token = useSelector(selectJWT)
     const [data, setData] = useState<FileData[]>([])
     const [deletingId, setDeletingId] = useState<number | null>(null)
@@ -21,7 +20,7 @@ export const Files = () => {
     const getAllFiles = async () => {
         console.log(token)
         try {
-          const url = API_URL + 'files/'
+          const url = API_URL + 'modifiedFiles/'
           const response = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -40,11 +39,10 @@ export const Files = () => {
         if (token) {
             getAllFiles();
         }
-    }, [token]);
+    }, [token, isReload]);
 
     return (
         <>
-        <FileUploadButton getAllFiles={getAllFiles} />
         {data.map((el, i) => <File id={el.id} filename={el.filename} text={el.originalName} setDeletingId={setDeletingId} key={el.id} />)}
         {deletingId && <DeleteFile id={String(deletingId)} getAllFiles={getAllFiles} setDeletingId={setDeletingId} />}
         </>

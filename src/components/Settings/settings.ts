@@ -15,6 +15,7 @@ export const settings = {
         normal: 'Приведение к нормальному виду с математическим ожиданием = 0 и дисперсией = 1'
     },
     modeling: {},
-    definition: {},
-    anomalies: {}
+    definition: {
+        kek: 'Кластеризация методом DBSCAN отрезков данных после применения PCA'
+    }
 }
