@@ -1,1 +1,1 @@
-export const API_URL = 'http://vechass:3010/'
+export const API_URL = 'http://venchass:3010/'
